@@ -32,15 +32,20 @@ int main() {
     READ(n);
     READ(k);
     deque<int> s;
-    VI a;
+    set<int> a;
     FOR(i,0,n) {
         int temp;
         cin>>temp;
-        if(count(s.begin(),s.end(),temp)==0) {
+        if(a.find(temp)==a.end()) {
+        //the set.find() function takes O(logn) time to execute which is much lower than STL count() function.
+        a.insert(temp);
         s.push_front(temp);
         }
-        if(s.size()>k)
+        if(s.size()>k) {
+            int t=s.back();
         s.pop_back();
+        a.erase(t);
+        }
     }
     cout<<s.size()<<'\n';
     while(!s.empty()) {
